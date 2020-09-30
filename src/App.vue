@@ -1,32 +1,31 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
+    <nav-bar color="#e5473b">
+      <template #left>
+        <img src="/img/aside.png" />
+      </template>
+      <template #center>
+        <img src="/img/music.svg" />
+        <img src="/img/logo.svg" />
+        <img src="/img/video.svg" />
+      </template>
+      <template #right>
+        <img src="/img/search.png" />
+      </template>
+    </nav-bar>
+    <router-view />
   </div>
 </template>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+<script>
+import NavBar from 'components/common/nav/NavBar'
+export default {
+  components: {
+    NavBar
+  }
 }
+</script>
 
-#nav {
-  padding: 30px;
-}
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
+<style scoped>
+@import url('assets/css/common.css');
 </style>
