@@ -1,8 +1,9 @@
 <template>
-  <div class="tab_item" :style="{color}" @click="tabHandler">
-    <span class="animate__animated animate__bounceIn" :class="activeStyle">
-      <slot></slot>
-    </span>
+  <div class="tab_item" :class="{iconTop}" @click="tabHandler" :style="{color, fontSize}">
+    <div class="iconWrap" v-if="isShow">
+      <slot name="icon"></slot>
+    </div>
+    <slot></slot>
   </div>
 </template>
 
@@ -13,10 +14,30 @@ export default {
       type: String,
       default: '#f5f5f5'
     },
+    fontSize: {
+      type: String,
+      default: '14px'
+    },
+    iconTop: {
+      type: Boolean,
+      default: true
+    },
     path: String
   },
   data() {
-    return {}
+    return {
+      isShow: true
+    }
+  },
+  mounted() {
+    setTimeout(() => {
+      const iconEls = document.querySelectorAll('.iconWrap')
+      for (const icon of iconEls) {
+        if (icon.children.length === 0) {
+          this.isShow = false
+        }
+      }
+    }, 500)
   },
   methods: {
     tabHandler() {
@@ -43,11 +64,33 @@ export default {
   font-size: var(--fs);
   cursor: pointer;
 
-  span {
-    color: var(--unActive);
+  &.iconTop {
+    flex-direction: column;
+    .iconWrap {
+      margin-bottom: 7px;
+    }
+  }
 
+  .iconWrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--theme);
+    width: 58px;
+    height: 58px;
+    border-radius: 50%;
+    transition-duration: 0.3s;
+    &:hover {
+      transform: rotate(180deg);
+    }
+
+    img {
+      width: 50%;
+    }
+  }
+
+  span {
     &.active {
-      color: var(--color);
       position: relative;
 
       &::after {

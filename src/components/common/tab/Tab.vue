@@ -1,13 +1,22 @@
 <template>
-  <div id="tab">
+  <div id="tab" :style="{height}">
     <slot></slot>
   </div>
 </template>
 
+<script>
+export default {
+  props: {
+    height: {
+      type: String,
+      default: '44px'
+    }
+  }
+}
+</script>
+
 <style lang="scss" scoped>
 #tab {
   display: flex;
-  background-color: var(--theme);
-  height: 44px;
 }
 </style>

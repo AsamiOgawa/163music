@@ -1,6 +1,6 @@
 <template>
   <div>
-    <tab>
+    <tab class="tab">
       <tab-item path="/home/recommend">推荐</tab-item>
       <tab-item path="/home/list">歌单</tab-item>
       <tab-item path="/home/rank">排行榜</tab-item>
@@ -17,3 +17,10 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.tab {
+  background-color: var(--theme) !important;
+  color: var(--color);
+}
+</style>
