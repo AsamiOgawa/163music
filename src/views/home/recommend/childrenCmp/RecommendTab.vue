@@ -1,24 +1,24 @@
 <template>
   <tab class="recommendTab" bgcolor="#fff" height="100px">
-    <tab-item color="#000" fontSize="13px" circle class="icon">
+    <tab-item color="#000" circle>
       <template #icon>
         <img src="/img/radio.png" />
       </template>
       <span class="animate__animated animate__bounceIn">私人FM</span>
     </tab-item>
-    <tab-item color="#000" fontSize="13px" circle class="icon">
+    <tab-item color="#000" circle>
       <template #icon>
         <img src="/img/radio.png" />
       </template>
       <span class="animate__animated animate__bounceIn">每日推荐</span>
     </tab-item>
-    <tab-item color="#000" fontSize="13px" circle class="icon">
+    <tab-item color="#000" circle>
       <template #icon>
         <img src="/img/list.png" />
       </template>
       <span class="animate__animated animate__bounceIn">歌单</span>
     </tab-item>
-    <tab-item color="#000" fontSize="13px" circle class="icon">
+    <tab-item color="#000" circle>
       <template #icon>
         <img src="/img/rank.png" />
       </template>
@@ -37,6 +37,10 @@ export default {
 
 <style lang="scss" scoped>
 .recommendTab {
-  padding: 5px 0;
+  height: 205px !important;
+
+  .icon {
+    width: 105px !important;
+  }
 }
 </style>

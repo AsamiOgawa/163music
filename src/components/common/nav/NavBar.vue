@@ -1,9 +1,9 @@
 <template>
-  <div class="navbar" :style="{'background-color': color}">
+  <div class="navbar" :style="{'background-color': color}" @click="navBarHandler">
     <div class="left">
       <slot name="left"></slot>
     </div>
-    <div class="center">
+    <div class="center" ref="center">
       <slot name="center"></slot>
     </div>
     <div class="right">
@@ -19,6 +19,21 @@ export default {
       type: String,
       default: '#007bff'
     }
+  },
+
+  mounted() {
+    const els = this.$refs.center.children
+    els.length && (this.centerEls = els.length)
+  },
+
+  data() {
+    return {
+      centerEls: 0
+    }
+  },
+
+  methods: {
+    navBarHandler(e) {}
   }
 }
 </script>
@@ -26,37 +41,32 @@ export default {
 <style lang="scss" scoped>
 .navbar {
   display: flex;
-  height: 45px;
 
-  .left {
+  .left,
+  .right {
+    width: 115px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    img {
+      width: 54px;
+      vertical-align: middle;
+    }
   }
 
   .center {
     flex: 1;
-
-    > img + img {
-      margin-left: 29px;
-    }
-  }
-
-  .right {
-  }
-
-  .left,
-  .right {
-    width: 58px;
-  }
-
-  .left,
-  .center,
-  .right {
     display: flex;
     justify-content: center;
     align-items: center;
-    cursor: pointer;
 
     img {
-      width: 29px;
+      width: 54px;
+
+      & + img {
+        margin-left: 38px;
+      }
     }
   }
 }

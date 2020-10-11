@@ -4,6 +4,8 @@ import Recommend from 'views/home/recommend/Recommend'
 import List from 'views/home/list/List'
 import Rank from 'views/home/rank/Rank'
 import Home from 'views/home/Home'
+import Personal from 'views/personal/Personal'
+import MV from 'views/mv/MV'
 
 Vue.use(VueRouter)
 
@@ -15,7 +17,9 @@ const routes = [
       { path: 'list', component: List },
       { path: 'rank', component: Rank },
     ]
-  }
+  },
+  { path: '/personal', component: Personal },
+  { path: '/mv', component: MV }
 ]
 
 const router = new VueRouter({

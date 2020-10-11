@@ -1,9 +1,13 @@
 <template>
   <div class="tab_item" :class="{iconTop}" @click="tabHandler" :style="{color, fontSize}">
+    <!-- 字体图标 -->
     <div class="iconWrap" v-if="isShow">
       <slot name="icon"></slot>
     </div>
-    <slot></slot>
+    <!-- 文字 -->
+    <span :class="activeStyle">
+      <slot></slot>
+    </span>
   </div>
 </template>
 
@@ -67,7 +71,7 @@ export default {
   &.iconTop {
     flex-direction: column;
     .iconWrap {
-      margin-bottom: 7px;
+      margin-bottom: 11px;
     }
   }
 
@@ -76,8 +80,8 @@ export default {
     justify-content: center;
     align-items: center;
     background-color: var(--theme);
-    width: 58px;
-    height: 58px;
+    width: 105px;
+    height: 105px;
     border-radius: 50%;
     transition-duration: 0.3s;
     &:hover {
@@ -90,20 +94,12 @@ export default {
   }
 
   span {
+    font-size: 25px;
+
     &.active {
       position: relative;
-
-      &::after {
-        content: '';
-        position: absolute;
-        padding-right: 100%;
-        height: 1.5px;
-        left: 0;
-        bottom: -5px;
-        background: #fff;
-        opacity: 1;
-        border-radius: 1.5px;
-      }
+      padding: 6px;
+      border-bottom: 3px solid #fff;
     }
   }
 }

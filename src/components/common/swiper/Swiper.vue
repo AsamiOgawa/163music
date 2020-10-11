@@ -1,13 +1,15 @@
 <template>
   <div
     id="swiper"
-    :style="{width, borderRadius: radius}"
+    :style="{ borderRadius: radius}"
     @mouseover="clearInterval"
     @mouseout="startInterval"
   >
-    <div class="img_row">
+    <!-- 轮播图区域 -->
+    <div class="img_row" ref="imgs">
       <slot></slot>
     </div>
+    <!-- 指示器区域 -->
     <div class="indictor_row" @click="indictorHandler">
       <i
         v-for="item of imgNum"
@@ -35,11 +37,6 @@ export default {
     time: {
       type: Number,
       default: 3000
-    },
-    // 设置轮播图容器的宽度
-    width: {
-      type: String,
-      default: '100%'
     }
   },
   data() {
@@ -59,26 +56,29 @@ export default {
     }
   },
   mounted() {
-    this.getDOM()
-    this.startInterval()
+    setTimeout(() => {
+      this.getDOM()
+      this.startInterval()
+    }, 2000)
   },
   methods: {
     /* 获取相关DOM元素 */
     getDOM() {
       // 必须延迟获取图片元素，因为图片挂载到swiper容器也是需要时间的
-      setTimeout(() => {
-        this.imgRow = swiper.firstChild
+      if (this.$refs.imgs) {
+        this.imgRow = this.$refs.imgs
         this.imgNum = this.imgRow.children.length
-        this.lastBtn = document.getElementsByClassName('last')[0]
-        this.nextBtn = document.getElementsByClassName('next')[0]
+      }
+      // 获取上/下一个图片的按钮
+      // this.lastBtn = document.getElementsByClassName('last')[0]
+      // this.nextBtn = document.getElementsByClassName('next')[0]
 
-        // 为按钮添加节流函数
-        // this.lastBtn.onclick = this.throttle(this.lastHandler, 700)
-        // this.nextBtn.onclick = this.throttle(this.nextHandler, 700)
+      // 为按钮添加节流函数
+      // this.lastBtn.onclick = this.throttle(this.lastHandler, 700)
+      // this.nextBtn.onclick = this.throttle(this.nextHandler, 700)
 
-        // 创建最后一项图片元素
-        this.imgRow && this.createLastImg()
-      }, 1000)
+      // 创建最后一项图片元素
+      this.imgRow && this.createLastImg()
     },
 
     /* 设置定时器 */
@@ -112,17 +112,21 @@ export default {
 
     /* 下一页图片功能 */
     nextHandler() {
-      this.currentIndex++
-      if (this.currentIndex === this.imgNum) {
-        this.imgRow.style.transform = `translateX(${-this.currentIndex * 100}%)`
-        setTimeout(() => {
-          this.currentIndex = 0
-          this.imgRow.style.transition = 0 + 's'
-          this.imgRow.style.transform = `translateX(0%)`
-        }, 500)
-      } else {
-        this.imgRow.style.transition = 0.3 + 's'
-        this.imgRow.style.transform = `translateX(${-this.currentIndex * 100}%)`
+      if (this.imgRow) {
+        this.currentIndex++
+        if (this.currentIndex === this.imgNum) {
+          this.imgRow.style.transform = `translateX(${-this.currentIndex *
+            100}%)`
+          setTimeout(() => {
+            this.currentIndex = 0
+            this.imgRow.style.transition = 0 + 's'
+            this.imgRow.style.transform = `translateX(0%)`
+          }, 500)
+        } else {
+          this.imgRow.style.transition = 0.3 + 's'
+          this.imgRow.style.transform = `translateX(${-this.currentIndex *
+            100}%)`
+        }
       }
     },
 
@@ -184,8 +188,8 @@ export default {
 
     i {
       display: inline-block;
-      width: 6px;
-      height: 6px;
+      width: 12px;
+      height: 12px;
       background-color: #ebedf0;
       border-radius: 50%;
       cursor: pointer;
@@ -193,7 +197,7 @@ export default {
       transition-duration: 0.5s;
 
       & + i {
-        margin-left: 8px;
+        margin-left: 12px;
       }
 
       &.indictorActive {

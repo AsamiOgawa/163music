@@ -3,8 +3,10 @@
 :root {
   --theme   : #e5473b;
   --color   : #f5f5f5;
+  --deep    : #b3b3b3;
   --unActive: #D8D8D8;
   --fs      : 15px;
+  --small   : 14px;
   --hoverfs : 16px;
 }
 
